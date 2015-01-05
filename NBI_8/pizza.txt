@@ -1,0 +1,44 @@
+/********************************************************
+** NBI - Assignment 8 
+** Answers to the proposed questions 
+** Group 07: 
+** 	- Manuel Polzhofer
+** 	- Javier González
+*********************************************************
+
+1. Decide whether it is possible to model the following statements in RDFS:
+
+   Statements in RDFS are triples of the form (x,P,y) where x and y are named and typed resources and 
+   P is a property with some defined semantics.
+   
+a) Any pizza is food 
+ 
+ - Yes, because pizza is a subclass of food and hence all instances of pizza 
+   belong automatically to the food class: (pizza, subClassOf, food) 
+
+
+b) Pizzas always have at least two toppings 
+
+ - No, this statement cannot be modelled, since the minimum amount of toppings is set to 1 in the given ontology.
+   In order to model this statement, the property 'hasTopping' should have as domain all the pizzas and as
+   range all the toppings with a minimum cardinality restriction of 2.
+
+c) Any pizza of the class Margherita has tomato as a topping 
+
+  - No, this is also not true since the Margherita pizza can have either the MozarellaTopping OR the tomatoTopping.
+    Assuming this OR is not exclusive, this means that these pizzas can have either mozarella or tomato topping or
+    both.
+    To make magherita pizzas have tomato as a topping we would have to include a cardinality constraint (or replace
+    the mentioned OR with an AND).
+
+d) Everything that has a topping is a pizza 
+
+  - Yes, we can model this statement because the domain of the property 'hasTopping' is the 'pizza' class.
+    This means that whenever we apply this property - e.g. (X, hasTopping, Y) - the resource X will have to
+    be a pizza.
+
+e) No pizza of the class Margherita has a topping of the class Meat 
+
+  - Yes, the ontology can also model this statement. As it was mentioned before, the toppings accepted in the
+    margherita pizza are ONLY (mozarellaTopping OR tomatoTopping). The ONLY keyword imposes the restriction that only
+    the tomato or the mozarella toppings are accepted for the margherita pizza.
